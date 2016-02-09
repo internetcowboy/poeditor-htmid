@@ -1,37 +1,32 @@
 /*
- * poeditor-htmid
+ * poeditor_htmid
  * 
  *  This is an adaptation of a plugin found https://github.com/Philoozushi/grunt-poeditor-pz . This plugin will download the localizations for a particular project ID and then get all of the string associated with the project. This plugin is to be used in combination with the other htmid plugins.
  *
  * Copyright (c) 2016 Codin Pangell
  * Licensed under the MIT license.
  */
-
 'use strict';
 
-
 var fs = require('fs'),
-  wget = require('wget'),
-  https = require('https'),
-  colors = require('colors'),
-  request = require('request'),
-  querystring = require('querystring');
+	wget = require('wget'),
+	https = require('https'),
+	colors = require('colors'),
+	request = require('request'),
+	querystring = require('querystring');
 
 var grunt;
 
-module.exports = function(grunt) {
-
-  // Please see the Grunt documentation for more information regarding task
-  // creation: http://gruntjs.com/creating-tasks
-
-  grunt.registerMultiTask('poeditor_htmid', 'This is an adaptation of a plugin found https://github.com/Philoozushi/grunt-poeditor-pz . This plugin will download the localizations for a particular project ID and then get all of the string associated with the project. This plugin is to be used in combination with the other htmid plugins.', function() {
-    
-    var data = this.data;
-    var opts = this.options();
-    download( data.download, this, opts, this.async() );
-
-  });
-
+module.exports = function(g) {
+	
+	grunt = g;
+	grunt.registerMultiTask('poeditor_htmid',
+	'This is an adaptation of a plugin found https://github.com/Philoozushi/grunt-poeditor-pz . This plugin will download the localizations for a particular project ID and then get all of the string associated with the project. This plugin is to be used in combination with the other htmid plugins.',
+	function() {
+		var data = this.data;
+	    var opts = this.options();
+	    download( data, this, opts, this.async() );
+	});
 };
 
 function getLanguages(_scope,opts,data,_cb) {
